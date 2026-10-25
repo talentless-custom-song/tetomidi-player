@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Download TetoMidi Player for Windows and Linux</title>
+<meta name="description" content="TetoMidi Player plays MIDI files as key presses for piano, drums and guitar in games. Download for Windows or Linux.">
+<meta name="color-scheme" content="dark">
+<link rel="icon" href="img/logo.webp" type="image/webp">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Source+Serif+4:opsz,wght@8..60,500;8..60,600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#000; --panel:#111; --text:#f3f3f3; --muted:#9a9a9a; --line:rgba(255,255,255,.12); --accent:#5b9bd5;
+  --serif:'Source Serif 4',Georgia,'Times New Roman',serif;
+  --sans:'Inter',system-ui,-apple-system,'Segoe UI',Roboto,sans-serif;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;color:var(--text);font:400 16px/1.65 var(--sans);overflow-x:hidden;
+  background:radial-gradient(60% 45% at 25% 12%,rgba(255,255,255,.07),transparent 70%),var(--bg)}
+body.lock{overflow:hidden}
+a{color:inherit}
+:focus-visible{outline:2px solid var(--accent);outline-offset:3px;border-radius:8px}
+.wrap{width:min(1040px,100% - 40px);margin-inline:auto}
+
+/* intro */
+#intro{position:fixed;inset:0;z-index:100;background:#000;display:grid;place-items:center;cursor:pointer;transition:opacity .7s ease,visibility .7s}
+#intro.done{opacity:0;visibility:hidden}
+.intro-in{display:flex;flex-direction:column;align-items:center;gap:6px}
+#intro img{width:clamp(120px,24vw,180px);height:auto;opacity:0;transform:scale(.85);animation:pop 1s .1s cubic-bezier(.2,.8,.2,1) forwards}
+#intro h2{margin:0;font:600 clamp(30px,6vw,52px)/1.2 var(--serif);letter-spacing:.01em;display:flex}
+#intro .l{display:inline-block;opacity:0;transform:translateY(14px);animation:rise .55s cubic-bezier(.2,.8,.2,1) forwards;animation-delay:calc(.9s + var(--i)*.05s)}
+#intro small{position:absolute;bottom:28px;color:#666;font-size:13px;opacity:0;animation:fade .6s 1.4s forwards}
+@keyframes pop{to{opacity:1;transform:none}}
+@keyframes rise{to{opacity:1;transform:none}}
+@keyframes fade{to{opacity:1}}
+
+nav{display:flex;align-items:center;justify-content:space-between;padding:22px 0}
+.brand{display:flex;align-items:center;gap:10px;font:600 22px var(--serif);text-decoration:none}
+.brand img{width:32px;height:32px}
+.brand small{font:400 13px var(--sans);color:var(--muted)}
+nav a.back{color:var(--muted);text-decoration:none;font-size:15px}
+nav a.back:hover{color:var(--text)}
+
+.hero{padding:clamp(48px,9vw,110px) 0 clamp(40px,7vw,80px);max-width:700px}
+h1{font:600 clamp(38px,6.5vw,66px)/1.07 var(--serif);margin:0 0 20px;letter-spacing:-.01em}
+.lead{font-size:clamp(17px,2.2vw,19px);color:#cfcfcf;margin:0 0 36px;max-width:56ch}
+.buttons{display:flex;flex-wrap:wrap;gap:16px}
+.meta{margin:22px 0 0;color:var(--muted);font-size:14px}
+
+/* liquid glass button */
+.glass{position:relative;isolation:isolate;display:inline-flex;align-items:center;gap:14px;
+  padding:16px 28px 16px 22px;border-radius:999px;text-decoration:none;color:#fff;
+  background:linear-gradient(140deg,rgba(255,255,255,.24),rgba(255,255,255,.05) 55%,rgba(255,255,255,.13));
+  -webkit-backdrop-filter:blur(18px) saturate(1.7);backdrop-filter:blur(18px) saturate(1.7);
+  border:1px solid rgba(255,255,255,.28);
+  box-shadow:inset 0 1.5px 0 rgba(255,255,255,.55),inset 0 -10px 18px rgba(255,255,255,.05),0 14px 34px rgba(0,0,0,.6);
+  transition:transform .25s cubic-bezier(.3,1.4,.5,1),box-shadow .25s}
+.glass::before{content:"";position:absolute;z-index:-1;left:6%;right:6%;top:5%;height:46%;border-radius:999px;
+  background:linear-gradient(180deg,rgba(255,255,255,.3),rgba(255,255,255,0));pointer-events:none}
+.glass::after{content:"";position:absolute;z-index:-1;inset:0;border-radius:inherit;opacity:0;transition:opacity .3s;
+  background:radial-gradient(120% 140% at var(--mx,50%) -20%,rgba(255,255,255,.3),transparent 60%)}
+.glass:hover{transform:translateY(-3px) scale(1.025);box-shadow:inset 0 1.5px 0 rgba(255,255,255,.7),inset 0 -10px 18px rgba(255,255,255,.08),0 20px 40px rgba(0,0,0,.7)}
+.glass:hover::after{opacity:1}
+.glass:active{transform:translateY(0) scale(.98)}
+.glass svg{width:34px;height:34px;flex:none}
+.glass .t{display:flex;flex-direction:column;line-height:1.25;text-align:left}
+.glass .t b{font:600 18px var(--sans)}
+.glass .t span{font-size:13px;color:rgba(255,255,255,.7)}
+
+
+/* video */
+.showcase{text-align:center;padding-top:clamp(8px,3vw,32px)}
+.showcase .sub{margin-inline:auto}
+.vframe{position:relative;width:min(960px,100%);margin:0 auto;border-radius:22px;padding:10px;
+  background:linear-gradient(145deg,rgba(255,255,255,.2),rgba(255,255,255,.04) 50%,rgba(255,255,255,.1));
+  border:1px solid rgba(255,255,255,.22);
+  box-shadow:inset 0 1.5px 0 rgba(255,255,255,.35),0 0 90px rgba(255,255,255,.07),0 30px 70px rgba(0,0,0,.7)}
+.vframe video{display:block;width:100%;aspect-ratio:16/9;border-radius:14px;background:#000;object-fit:cover}
+
+section{padding:clamp(40px,6vw,72px) 0}
+h2.h{font:600 clamp(28px,4vw,38px)/1.15 var(--serif);margin:0 0 12px}
+.sub{color:var(--muted);margin:0 0 28px;max-width:60ch}
+.tabs{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:20px}
+.tabs button{font:500 15px var(--sans);color:var(--muted);background:transparent;border:1px solid var(--line);
+  padding:9px 18px;border-radius:999px;cursor:pointer;transition:background .2s,color .2s,border-color .2s}
+.tabs button:hover{color:var(--text)}
+.tabs button[aria-selected="true"]{color:#000;background:#fff;border-color:#fff}
+.viewer{display:grid;grid-template-columns:minmax(0,1.5fr) minmax(0,1fr);gap:clamp(20px,4vw,48px);align-items:center;
+  background:var(--panel);border:1px solid var(--line);border-radius:20px;padding:clamp(16px,3vw,32px)}
+.shot{display:flex;justify-content:center}
+.shot img{max-width:100%;max-height:520px;height:auto;border-radius:10px;border:1px solid var(--line)}
+.viewer h3{font:600 24px var(--serif);margin:0 0 10px}
+.viewer p{margin:0 0 14px;color:#c8c8c8}
+.viewer ul{margin:0;padding-left:20px;color:#c8c8c8}
+.viewer li{margin:4px 0}
+.viewer li::marker{color:var(--accent)}
+
+.cols{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:clamp(28px,5vw,64px)}
+.keys{margin:0;padding:0;list-style:none}
+.keys li{display:flex;justify-content:space-between;align-items:center;gap:16px;padding:11px 0;border-bottom:1px solid var(--line)}
+.keys kbd{font:500 13px var(--sans);background:#1a1a1a;border:1px solid var(--line);border-radius:8px;padding:2px 12px;min-width:44px;text-align:center}
+ol.steps{margin:0;padding:0;list-style:none;counter-reset:s}
+ol.steps li{counter-increment:s;position:relative;padding:0 0 22px 52px}
+ol.steps li::before{content:counter(s);position:absolute;left:0;top:0;width:36px;height:36px;border-radius:50%;
+  display:grid;place-items:center;font:600 16px var(--serif);border:1px solid rgba(255,255,255,.35)}
+ol.steps b{display:block}
+ol.steps span{color:var(--muted);font-size:15px}
+
+.bottom{text-align:center;padding-bottom:70px}
+.bottom .buttons{justify-content:center;margin-top:24px}
+footer{border-top:1px solid var(--line);padding:26px 0 40px;color:var(--muted);font-size:14px;text-align:center}
+
+@media (max-width:760px){
+  .viewer,.cols{grid-template-columns:1fr}
+  .glass{width:100%}
+  .buttons{flex-direction:column}
+}
+@media (prefers-reduced-motion:reduce){
+  *{transition:none!important;scroll-behavior:auto!important}
+  #intro img,#intro .l,#intro small{animation:none!important;opacity:1;transform:none}
+}
+</style>
+<noscript><style>#intro{display:none}</style></noscript>
+</head>
+<body class="lock">
+
+<div id="intro" role="presentation" aria-hidden="true">
+  <div class="intro-in">
+    <img src="img/logo.webp" alt="" width="180" height="180">
+    <h2 id="intro-title" aria-label="TetoMidi Player"></h2>
+  </div>
+  <small>Click to skip</small>
+</div>
+
+<div class="wrap">
+  <nav>
+    <a class="brand" href="index.html"><img src="img/logo.webp" alt="" width="32" height="32">TetoMidi Player<small>v1.2</small></a>
+    <a class="back" href="index.html">‹ Back to home</a>
+  </nav>
+
+  <header class="hero">
+    <h1>Play MIDI files as key presses in your game</h1>
+    <p class="lead">TetoMidi Player reads a MIDI file and presses the piano, drum or guitar keys for you. It has a falling-note view to follow along, hotkeys that work while your game is focused, and a small mini player to keep next to your screen.</p>
+    <div class="buttons">
+      <a class="glass" href="https://www.mediafire.com/file/drv5yh4o47p9uc6/tetoMIDI-windows.zip/file" target="_blank" rel="noopener">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path fill="#fff" d="M2 4.2 10.4 3v8.1H2zM11.6 2.8 22 1.3v9.8H11.6zM2 12.3h8.4v8.1L2 19.2zM11.6 12.3H22v10.4l-10.4-1.5z"/></svg>
+        <span class="t"><b>Download for Windows</b><span>tetoMIDI-windows.zip</span></span>
+      </a>
+      <a class="glass" href="https://www.mediafire.com/file/tfz2yi43aedb6zd/tetoMIDI-linux.zip/file" target="_blank" rel="noopener">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path fill="#fff" d="M12 1.8c-2.6 0-3.6 2.2-3.6 4.6 0 1.4-.4 2.3-1.3 3.7C5.9 12 5 14 5 16c0 1.1.3 2 .9 2.6-.6.5-1.4.9-1.4 1.8 0 1.2 1.6 1.4 3 1.6 1.1.1 1.8.3 2.6.3.5.7 1.2 1 1.9 1s1.4-.3 1.9-1c.8 0 1.5-.2 2.6-.3 1.4-.2 3-.4 3-1.6 0-.9-.8-1.3-1.4-1.8.6-.6.9-1.5.9-2.6 0-2-.9-4-2.1-5.9-.9-1.4-1.3-2.3-1.3-3.7 0-2.4-1-4.6-3.6-4.6z"/><path fill="#000" d="M10.2 5.2a.8 1.1 0 1 0 0 2.2.8 1.1 0 0 0 0-2.2zm3.6 0a.8 1.1 0 1 0 0 2.2.8 1.1 0 0 0 0-2.2z"/><path fill="#f4b73c" d="M12 7.6c-1 0-1.9.5-1.9 1.1S11 9.9 12 9.9s1.9-.6 1.9-1.2S13 7.6 12 7.6z"/><path fill="#d9d9d9" d="M12 11c-1.9 0-3.3 2.3-3.3 4.7 0 1.9 1.4 3.2 3.3 3.2s3.3-1.3 3.3-3.2C15.3 13.3 13.9 11 12 11z"/></svg>
+        <span class="t"><b>Download for Linux</b><span>tetoMIDI-linux.zip</span></span>
+      </a>
+    </div>
+    <p class="meta">Free · hosted on MediaFire · version 1.2</p>
+  </header>
+
+  <section class="showcase" aria-labelledby="vh">
+    <h2 class="h" id="vh">See it in action</h2>
+    <p class="sub">A 20-second look at piano, drums, guitar, playlist and settings.</p>
+    <div class="vframe">
+      <video id="promo" src="tetoMIDI-promo.mp4" poster="img/poster.webp" muted loop playsinline controls preload="metadata" aria-label="TetoMidi Player promo video"></video>
+    </div>
+  </section>
+
+  <section aria-labelledby="tn">
+    <h2 class="h" id="tn">See what the app looks like</h2>
+    <p class="sub">Pick a tab to browse the main screens.</p>
+    <div class="tabs" role="tablist" aria-label="App screens">
+      <button role="tab" aria-selected="true" data-k="piano">Piano</button>
+      <button role="tab" aria-selected="false" data-k="drum">Drums</button>
+      <button role="tab" aria-selected="false" data-k="guitar">Guitar</button>
+      <button role="tab" aria-selected="false" data-k="playlist">Playlist</button>
+      <button role="tab" aria-selected="false" data-k="mini">Mini player</button>
+      <button role="tab" aria-selected="false" data-k="settings">Settings</button>
+    </div>
+    <div class="viewer" role="tabpanel">
+      <div class="shot"><img id="v-img" src="img/piano.webp" alt="" width="1060" height="652"></div>
+      <div id="v-txt"></div>
+    </div>
+  </section>
+
+  <section class="cols">
+    <div>
+      <h2 class="h">Default hotkeys</h2>
+      <p class="sub">They work while your game window is focused. You can change them in Settings.</p>
+      <ul class="keys">
+        <li>Play <kbd>F2</kbd></li>
+        <li>Pause <kbd>F3</kbd></li>
+        <li>Stop <kbd>F4</kbd></li>
+        <li>Speed up <kbd>F5</kbd></li>
+        <li>Slow down <kbd>F6</kbd></li>
+      </ul>
+    </div>
+    <div>
+      <h2 class="h">Get started</h2>
+      <p class="sub">No installer needed. Three steps.</p>
+      <ol class="steps">
+        <li><b>Download the .zip</b><span>Choose the Windows or Linux version above.</span></li>
+        <li><b>Extract it</b><span>Unzip into any folder.</span></li>
+        <li><b>Open tetoMIDI</b><span>Click Open, pick a .mid file, then press Play or F2. On Linux, hotkeys need an X11 session.</span></li>
+      </ol>
+    </div>
+  </section>
+
+  <section class="bottom">
+    <h2 class="h">Ready to play?</h2>
+    <p class="sub" style="margin-inline:auto">Choose your operating system.</p>
+    <div class="buttons">
+      <a class="glass" href="https://www.mediafire.com/file/drv5yh4o47p9uc6/tetoMIDI-windows.zip/file" target="_blank" rel="noopener">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path fill="#fff" d="M2 4.2 10.4 3v8.1H2zM11.6 2.8 22 1.3v9.8H11.6zM2 12.3h8.4v8.1L2 19.2zM11.6 12.3H22v10.4l-10.4-1.5z"/></svg>
+        <span class="t"><b>Download for Windows</b><span>tetoMIDI-windows.zip</span></span>
+      </a>
+      <a class="glass" href="https://www.mediafire.com/file/tfz2yi43aedb6zd/tetoMIDI-linux.zip/file" target="_blank" rel="noopener">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path fill="#fff" d="M12 1.8c-2.6 0-3.6 2.2-3.6 4.6 0 1.4-.4 2.3-1.3 3.7C5.9 12 5 14 5 16c0 1.1.3 2 .9 2.6-.6.5-1.4.9-1.4 1.8 0 1.2 1.6 1.4 3 1.6 1.1.1 1.8.3 2.6.3.5.7 1.2 1 1.9 1s1.4-.3 1.9-1c.8 0 1.5-.2 2.6-.3 1.4-.2 3-.4 3-1.6 0-.9-.8-1.3-1.4-1.8.6-.6.9-1.5.9-2.6 0-2-.9-4-2.1-5.9-.9-1.4-1.3-2.3-1.3-3.7 0-2.4-1-4.6-3.6-4.6z"/><path fill="#000" d="M10.2 5.2a.8 1.1 0 1 0 0 2.2.8 1.1 0 0 0 0-2.2zm3.6 0a.8 1.1 0 1 0 0 2.2.8 1.1 0 0 0 0-2.2z"/><path fill="#f4b73c" d="M12 7.6c-1 0-1.9.5-1.9 1.1S11 9.9 12 9.9s1.9-.6 1.9-1.2S13 7.6 12 7.6z"/><path fill="#d9d9d9" d="M12 11c-1.9 0-3.3 2.3-3.3 4.7 0 1.9 1.4 3.2 3.3 3.2s3.3-1.3 3.3-3.2C15.3 13.3 13.9 11 12 11z"/></svg>
+        <span class="t"><b>Download for Linux</b><span>tetoMIDI-linux.zip</span></span>
+      </a>
+    </div>
+  </section>
+</div>
+
+<footer><div class="wrap">TetoMidi Player v1.2</div></footer>
+
+<script>
+// intro
+(function(){
+  const intro=document.getElementById('intro'),title=document.getElementById('intro-title');
+  'TetoMidi Player'.split('').forEach((c,i)=>{
+    const s=document.createElement('span');s.className='l';s.style.setProperty('--i',i);
+    s.textContent=c===' '?'\u00a0':c;title.appendChild(s);
+  });
+  const reduce=matchMedia('(prefers-reduced-motion: reduce)').matches;
+  let closed=false;
+  function close(){
+    if(closed)return;closed=true;
+    intro.classList.add('done');document.body.classList.remove('lock');
+    setTimeout(()=>intro.remove(),800);
+  }
+  intro.addEventListener('click',close);
+  addEventListener('keydown',close,{once:true});
+  setTimeout(close,reduce?600:2900);
+})();
+
+// screens viewer
+const D={
+  piano:{img:'img/piano.webp',w:1060,h:652,alt:'MIDI player screen with falling piano notes',t:'Piano',p:'Open a MIDI file, watch the notes fall onto the keyboard, and let the app press the keys for you.',l:['88-key or 61-key keyboard','Sustain, velocity and note lengths','Loop and tempo control']},
+  drum:{img:'img/drum.webp',w:1060,h:652,alt:'Drum player screen',t:'Drums',p:'Each part of the kit has its own lane, with the matching key shown underneath.',l:['Kick, snare, hi-hat, toms, crash, ride, bell','Key labels under every lane','Hold, release and note lengths']},
+  guitar:{img:'img/guitar.webp',w:1060,h:652,alt:'Guitar player screen',t:'Guitar',p:'Six strings (E A D G B e) with the fret number shown on each string.',l:['Falling notes per string','Human mode for a more natural feel','Hold, release and note lengths']},
+  playlist:{img:'img/playlist.webp',w:580,h:722,alt:'MIDI Player window with a song list',t:'Playlist',p:'Add several files or a whole folder and let it play on its own.',l:['Add files, add folder, remove, clear','Previous, pause, stop, next','Repeat all, shuffle and volume']},
+  mini:{img:'img/mini-console.webp',w:470,h:410,alt:'Mini player with the console open',t:'Mini player',p:'A small window with just the controls, easy to keep beside your game. The console shows which keys the app is pressing.',l:['Switch between piano, drums and guitar','Console lists every key press and release','Expand returns to the full window']},
+  settings:{img:'img/settings.webp',w:1060,h:652,alt:'Settings screen',t:'Settings',p:'Adjust hotkeys, speed and looks.',l:['Change the play, pause, stop and speed hotkeys','Note fall time, key glow and note color','Window opacity and always on top']}
+};
+const img=document.getElementById('v-img'),txt=document.getElementById('v-txt'),tabs=document.querySelectorAll('.tabs button');
+function show(k){
+  const d=D[k];
+  img.src=d.img;img.alt=d.alt;img.width=d.w;img.height=d.h;
+  txt.innerHTML='<h3>'+d.t+'</h3><p>'+d.p+'</p><ul>'+d.l.map(x=>'<li>'+x+'</li>').join('')+'</ul>';
+  tabs.forEach(b=>b.setAttribute('aria-selected',b.dataset.k===k));
+}
+tabs.forEach(b=>b.addEventListener('click',()=>show(b.dataset.k)));
+show('piano');
+
+
+// play the promo only while it is on screen
+(function(){
+  const v=document.getElementById('promo');
+  if(!v||matchMedia('(prefers-reduced-motion: reduce)').matches||!('IntersectionObserver' in window))return;
+  new IntersectionObserver(es=>es.forEach(e=>{
+    if(e.isIntersecting&&e.intersectionRatio>=.6){v.play().catch(()=>{});}else{v.pause();}
+  }),{threshold:[0,.6]}).observe(v);
+})();
+
+// light follows the pointer on glass buttons
+document.querySelectorAll('.glass').forEach(g=>g.addEventListener('pointermove',e=>{
+  const r=g.getBoundingClientRect();g.style.setProperty('--mx',((e.clientX-r.left)/r.width*100)+'%');
+}));
+</script>
+</body>
+</html>
