@@ -1,6 +1,15 @@
 {
-  "cleanUrls": true,
+  "cleanUrls": false,
   "redirects": [
-    { "source": "/downloads", "destination": "/", "permanent": false }
+    {
+      "source": "/downloads",
+      "destination": "/",
+      "permanent": false
+    },
+    {
+      "source": "/downloads.html",
+      "destination": "/",
+      "permanent": false
+    }
   ]
 }
